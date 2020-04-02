@@ -1,0 +1,37 @@
+@baseUrl = http://localhost:9000/seller
+
+###Get Product of Seller
+GET {{baseUrl}}/g9XV7380w5/product/BkW03RtSB
+
+### Update Product
+PUT {{baseUrl}}/g9XV7380w5/product/BkW03RtSB
+Content-Type: application/json
+
+{
+  "unit_price": 10.99,
+  "product_name" : "glass prison"
+}
+
+
+### Create
+POST {{baseUrl}}/g9XV7380w5/product
+Content-Type: application/json
+
+{
+  "product_id": "1020304050",
+  "product_name": "mug",
+  "description": "special mug",
+  "unit_price": "23.10"
+}
+
+### Delete
+DELETE {{baseUrl}}/g9XV7380w5/product/1020304050
+
+### Filter Sellers
+POST {{baseUrl}}/--Q1XJaJkj/product/filter
+Content-Type: application/json
+
+{  
+  "filter" : {"product_name" : "mach", "description" : "joh"},
+  "paging"  : { "rows" : 5, "page" : 1}  
+}

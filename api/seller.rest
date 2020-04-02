@@ -1,0 +1,47 @@
+@baseUrl = http://localhost:9000/seller
+
+
+### get
+GET http://localhost:3000/api/seller/1uXwr2CQTd
+### Get Seller by Id
+GET  {{baseUrl}}/basd11
+
+
+### Update Seller
+PUT  {{baseUrl}}/basd11
+Content-Type: application/json
+
+{
+  "company_name": "XDAGG",
+  "contact_name": " JASON TALON"
+}
+
+### Create Seller
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "seller_id": "bassw",
+  "company_name": "WATUSI",
+  "contact_name": " xxxxxx TALON",
+  "email": "ZRYfyAoX7v",
+  "address": "xdadad",
+  "city": "w2llvIi-sV",
+  "state": "8LifTeooBy",
+  "country": "a0GW_p6__k",
+  "zip": "cCu2vVLdpz",
+  "phone": "TUBCGKvWjM"
+}
+
+### Delete Seller
+DELETE {{baseUrl}}/cacca
+
+
+### Filter Sellers
+POST {{baseUrl}}/filter
+Content-Type: application/json
+
+{
+  "paging"  : { "rows" : 5, "page" : 1},
+  "order_by" : "city asc"
+}

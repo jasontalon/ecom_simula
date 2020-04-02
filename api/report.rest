@@ -1,0 +1,11 @@
+@baseUrl = http://localhost:9000/report
+
+###
+GET {{baseUrl}}/top/products
+
+###
+GET {{baseUrl}}/top/sellers
+
+###
+GET {{baseUrl}}/daily-sales
+

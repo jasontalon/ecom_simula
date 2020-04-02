@@ -1,0 +1,32 @@
+@baseUrl = http://localhost:9000/cart
+
+###
+GET {{baseUrl}}/
+
+###
+POST {{baseUrl}}/add
+Content-Type: application/json
+
+{
+    "seller_id" : "SELLER1",
+    "product_id": "PRODUCT-001",
+    "quantity" : 5
+}
+
+###
+POST {{baseUrl}}/checkout
+Content-Type: application/json
+
+{
+    "cart_owner" : "Jason Talon"
+}
+
+
+###
+DELETE {{baseUrl}}/
+Content-Type: application/json
+
+{
+    "product_id" : "PRODUCT-001",
+    "seller_id": "SELLER1"
+}

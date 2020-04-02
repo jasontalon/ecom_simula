@@ -1,0 +1,44 @@
+version: "3"
+services:
+  db_admin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    ports:
+      - "5000:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@postgres.com
+      PGADMIN_DEFAULT_PASSWORD: password
+  db:
+    image: postgres:12-alpine
+    restart: always
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - backups:/backups
+    ports:
+      - "5432:5432"
+    environment: 
+      POSTGRES_PASSWORD: password
+  api:
+    build: ./api
+    ports:
+      - "5434:9000"
+    restart: unless-stopped
+    depends_on: 
+      - "db"
+    environment:
+      PORT : 9000
+      PG_CONNECTION_STRING: postgresql://postgres:password@db:5432/postgres
+  web:
+    build: ./web
+    ports:
+      - "5435:3000"
+    depends_on:
+      - "api"
+      - "db"
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3000
+      API_URL: http://api:9000      
+volumes:
+  db_data:
+  backups:
