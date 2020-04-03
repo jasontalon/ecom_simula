@@ -22,7 +22,7 @@ You may seamlessly deploy the whole app using docker-compose cli. [See below for
 ## See it in action
 http://moscord-env.eba-m5685j4z.ap-southeast-1.elasticbeanstalk.com/
 
-Deployed the app using AWS Elastic Beanstalk for both web and api services which running under Docker w/ each designated (multi) containers.
+The app is deployed to a cloud environment using AWS Elastic Beanstalk for both web and api services which running under Docker w/ each designated (multi) containers.
 
 ## Running in your local environment
 ### Requirements
