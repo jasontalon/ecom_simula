@@ -26,8 +26,8 @@ The app is deployed to a cloud environment using AWS Elastic Beanstalk for both 
 
 ## Running in your local environment
 ### Requirements
-- **Docker**
-- **Docker-Compose**
+- **Docker** ^19.x
+- **Docker-Compose** ^1.17
 
 *Note:* The app's Docker compose configuration will use the following ports:
 - **5000** - pgadmin
