@@ -7,6 +7,11 @@ A very simple app that simulates e-commerce basic behaviors such as:
 3. Adding products into cart w/ checkout behavior
 4. Sales reports
 
+### Limitations
+1. No Auth. (Authorization/Authentication)
+2. No actual payments.
+3. It's a simulation.
+
 ### Components
 There are 3 components for building the app:
 1. Database - Using Postgres and knex as SQL query builder.
