@@ -32,6 +32,7 @@ services:
     build: ./web
     ports:
       - "5435:3000"
+    restart: unless-stopped
     depends_on:
       - "api"
       - "db"
