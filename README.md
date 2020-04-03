@@ -20,7 +20,7 @@ Database migrations is handled and defined in the API which will run upon starti
 You may seamlessly deploy the whole app using docker-compose cli. [See below for the installation instructions.](#Installation)
 
 ## See it in action
-http://moscord-env.eba-m5685j4z.ap-southeast-1.elasticbeanstalk.com/sellers/create
+http://moscord-env.eba-m5685j4z.ap-southeast-1.elasticbeanstalk.com/
 
 Deployed the app using AWS Elastic Beanstalk for both web and api services which running under Docker w/ each designated (multi) containers.
 
