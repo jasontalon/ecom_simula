@@ -1,7 +1,7 @@
 # E-Commerce Exercise
 
 ## About
-A simple app that simulates e-commerce basic behaviors such as:
+A very simple app that simulates e-commerce basic behaviors such as:
 1. Creating/Managing sellers
 2. Creating/Managing products
 3. Adding products into cart w/ checkout behavior
