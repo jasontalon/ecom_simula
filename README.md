@@ -35,7 +35,7 @@ Deployed the app using AWS Elastic Beanstalk for both web and api services which
 - **5434** - api
 - **5435** - web
 
-If your environment is using the said ports, then adjust the port mapping defined in the docker-compose.yml file as desired.
+If your environment is using the abovementioned ports, then adjust the port mapping defined in the docker-compose.yml file as desired.
 ### Installation
 
  1. Clone the repository. 
