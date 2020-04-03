@@ -1,0 +1,65 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [
+      {
+        "name": "api",
+        "image": "307452115733.dkr.ecr.ap-southeast-1.amazonaws.com/moscord-api:v0.1",
+        "essential": true,
+        "memory": 256,
+        "portMappings": [
+          {
+            "hostPort": 8080,
+            "containerPort": 8080
+          }
+        ],
+        "environment": [
+          { "name": "PORT", "value": "8080" },
+          { "name": "PG_CONNECTION_STRING", "value": "postgresql://username:password@host:5432/database" }
+        ]
+      },
+      {
+        "name": "web",
+        "image": "307452115733.dkr.ecr.ap-southeast-1.amazonaws.com/moscord-web:v0.1",
+        "essential": true,
+        "memory": 256,
+        "portMappings": [
+          {
+            "hostPort": 80,
+            "containerPort": 3000
+          }
+        ],
+        "links":["api"],
+        "environment": [
+          { "name": "PORT", "value": "3000" },
+          { "name": "HOST", "value": "0.0.0.0" },
+          { "name": "API_URL", "value": "http://api:8080" }       
+        ]
+      }
+    ],
+    "Statement": [
+      {
+        "Sid": "AllowEbAuth",
+        "Effect": "Allow",
+        "Action": ["ecr:GetAuthorizationToken"],
+        "Resource": ["*"]
+      },
+      {
+        "Sid": "AllowPull",
+        "Effect": "Allow",
+        "Resource": [
+          "arn:aws:ecr:ap-southeast-1:307452115733:amazonaws.com/moscord-api:v0.1",
+          "arn:aws:ecr:ap-southeast-1:307452115733:amazonaws.com/moscord-web:v0.1"
+        ],
+        "Action": [
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:GetRepositoryPolicy",
+          "ecr:DescribeRepositories",
+          "ecr:ListImages",
+          "ecr:BatchGetImage"
+        ]
+      }
+    ]
+  }
+  
