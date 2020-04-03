@@ -29,6 +29,8 @@
       <b-col
         ><b-table
           class="my-3"
+          :busy="is_busy"
+          show-empty
           small
           striped
           hover
@@ -50,6 +52,17 @@
           </template>
           <template v-slot:cell(unit_price)="data">
             {{ data.item.unit_price | toCurrency }}
+          </template>
+          <template v-slot:table-busy>
+            <div class="text-center text-danger my-2">
+              <b-spinner class="align-middle"></b-spinner>
+              <strong>Loading...</strong>
+            </div>
+          </template>
+          <template v-slot:empty="">
+            <div class="text-center text-info my-2">
+              No data
+            </div>
           </template>
         </b-table>
         <div class="d-flex justify-content-end">
@@ -73,6 +86,7 @@ export default {
 
   data() {
     return {
+      is_busy: false,
       product_id: "",
       product_name: "",
       description: "",
@@ -92,9 +106,10 @@ export default {
     };
   },
 
-  created() {
-    this.search();
+  async created() {
+    await this.search();
   },
+
   filters: {
     toCurrency: function(value) {
       var formatter = new Intl.NumberFormat("en-US", {
@@ -114,6 +129,7 @@ export default {
     },
 
     async search() {
+      this.is_busy = true;      
       const filter = {
           ...this.$_.pick(this.$data, [
             "product_id",
@@ -132,6 +148,7 @@ export default {
 
       this.products = results;
       this.itemCount = count;
+      this.is_busy = false;
     },
     async sortingChanged({ sortBy, sortDesc }) {
       const order = sortDesc ? "asc" : "desc";

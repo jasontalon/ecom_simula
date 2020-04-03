@@ -34,6 +34,8 @@
       ><b-col
         ><b-table
           class="my-3"
+          show-empty
+          :busy="is_busy"
           small
           striped
           hover
@@ -53,6 +55,17 @@
             <b-button variant="link" :to="'/sellers/' + data.item.seller_id">{{
               data.item.seller_id
             }}</b-button>
+          </template>
+          <template v-slot:table-busy>
+            <div class="text-center text-danger my-2">
+              <b-spinner class="align-middle"></b-spinner>
+              <strong>Loading...</strong>
+            </div>
+          </template>
+          <template v-slot:empty="">
+            <div class="text-center text-info my-2">
+              No data
+            </div>
           </template>
         </b-table>
         <div class="d-flex justify-content-end">
@@ -75,6 +88,7 @@ export default {
   components: { FormTextInput },
   data() {
     return {
+      is_busy: false,
       seller_id: "",
       contact_name: "",
       company_name: "",
@@ -94,10 +108,11 @@ export default {
   methods: {
     async deleteSeller(seller_id) {
       await this.$axios.$delete(`/api/seller/${seller_id}`);
-      this.search();
+      await this.search();
     },
 
-    async search() {
+    async search() {      
+      this.is_busy = true;
       const filter = this.$_.pick(this.$data, [
           "seller_id",
           "contact_name",
@@ -114,6 +129,7 @@ export default {
 
       this.sellers = results;
       this.itemCount = count;
+      this.is_busy = false;
     },
     async sortingChanged({ sortBy, sortDesc }) {
       const order = sortDesc ? "asc" : "desc";
@@ -121,8 +137,8 @@ export default {
       await this.search();
     }
   },
-  async created() {
-    await this.search();
+  async mounted() {    
+    await this.search();    
   }
 };
 </script>

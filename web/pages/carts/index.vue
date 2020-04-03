@@ -6,6 +6,8 @@
     <b-row>
       <b-col>
         <b-table
+          :busy="is_busy"
+          show-empty
           small
           striped
           hover
@@ -13,6 +15,17 @@
           :fields="fields"
           @sort-changed="sortingChanged"
         >
+          <template v-slot:table-busy>
+            <div class="text-center text-danger my-2">
+              <b-spinner class="align-middle"></b-spinner>
+              <strong>Loading...</strong>
+            </div>
+          </template>
+          <template v-slot:empty="">
+            <div class="text-center text-info my-2">
+              No data
+            </div>
+          </template>
           <template v-slot:cell(cart_id)="data">
             <b-link :to="'/cart/' + data.item.cart_id">{{
               data.item.cart_id
@@ -88,6 +101,7 @@ export default {
   },
   methods: {
     async refresh() {
+      this.is_busy = true;    
       const filter = { status: this.status },
         paging = { rows: this.rows, page: this.page },
         order_by = this.order_by;
@@ -102,6 +116,7 @@ export default {
         if (p.status == "complete") return { ...p, _rowVariant: "success" };
         return p;
       });
+      this.is_busy = false;
     },
     async sortingChanged({ sortBy, sortDesc }) {
       const order = sortDesc ? "asc" : "desc";

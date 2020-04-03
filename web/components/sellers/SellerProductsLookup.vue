@@ -34,6 +34,8 @@
       <b-col>
         <b-table
           class="my-3"
+          show-empty
+          :busy="is_busy"
           small
           striped
           hover
@@ -41,6 +43,17 @@
           :fields="fields"
           @sort-changed="sortingChanged"
         >
+          <template v-slot:table-busy>
+            <div class="text-center text-danger my-2">
+              <b-spinner class="align-middle"></b-spinner>
+              <strong>Loading...</strong>
+            </div>
+          </template>
+          <template v-slot:empty="">
+            <div class="text-center text-info my-2">
+              No data
+            </div>
+          </template>
           <template v-slot:cell(actions)="data">
             <b-button
               variant="outline-danger"
@@ -88,6 +101,7 @@ export default {
 
   data() {
     return {
+      is_busy: false,
       product_id: "",
       product_name: "",
       description: "",
@@ -105,19 +119,20 @@ export default {
     };
   },
 
-  created() {
+  async mounted() {
     if (!this.sellerId) return;
-    this.search();
+    await this.search();
   },
   methods: {
     async deleteProduct(product_id) {
       await this.$axios.$delete(
         `/api/seller/${this.sellerId}/product/${product_id}`
       );
-      this.search();
+      await this.search();
     },
 
-    async search() {
+    async search() {      
+      this.is_busy = true;
       const seller_id = this.sellerId;
       const filter = {
           ...this.$_.pick(this.$data, [
@@ -141,6 +156,7 @@ export default {
 
       this.products = results;
       this.itemCount = count;
+      this.is_busy = false;
     },
     async sortingChanged({ sortBy, sortDesc }) {
       const order = sortDesc ? "asc" : "desc";

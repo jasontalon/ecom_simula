@@ -1,8 +1,27 @@
 <template>
   <div>
-    <b-alert variant="success" :show="item_added" dismissible>Added to cart!</b-alert>
+    <b-alert variant="success" :show="item_added" dismissible
+      >Added to cart!</b-alert
+    >
     <h3>My Cart Items</h3>
-    <b-table small :items="this.details" :fields="this.fields">
+    <b-table
+      small
+      :items="this.details"
+      :fields="this.fields"
+      show-empty
+      :busy="is_busy"
+    >
+      <template v-slot:table-busy>
+        <div class="text-center text-danger my-2">
+          <b-spinner class="align-middle"></b-spinner>
+          <strong>Loading...</strong>
+        </div>
+      </template>
+      <template v-slot:empty="">
+        <div class="text-center text-info my-2">
+          No data
+        </div>
+      </template>
       <template v-slot:cell(product_id)="data">
         <b-link
           :to="
@@ -108,6 +127,7 @@ export default {
   components: { FormTextInput },
   data() {
     return {
+      is_busy: false,
       item_added: false,
       agreement: true,
       cart_owner: "",
@@ -133,6 +153,7 @@ export default {
       await this.refresh();
     },
     async refresh() {
+      this.is_busy = true;
       try {
         const { head, details } = await this.$axios.$get("/api/cart");
 
@@ -141,6 +162,7 @@ export default {
       } catch (err) {
         //no cart.
       }
+      this.is_busy = false;
     },
     async checkout() {
       await this.$axios.$post("/api/cart/checkout", {
