@@ -11,7 +11,7 @@ A very simple app that simulates e-commerce basic behaviors such as:
 There are 3 components for building the app:
 1. Database - Using Postgres and knex as SQL query builder.
 2. API (Backend) - Using NodeJS and Express as the web application Framework.
-3. Web (Frontend) - Using Nuxt (Vue) and Bootstrap as the UI Framework.
+3. Web (Frontend) - Using Nuxt (Vue) with Bootstrap as the UI Framework.
 
 ### DB Migration
 Database migrations is handled and defined in the API which will run upon starting the service.
