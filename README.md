@@ -1,6 +1,28 @@
 # E-Commerce Exercise
 
 ## About
+A simple app that simulates e-commerce basic behaviors such as:
+1. Creating/Managing sellers
+2. Creating/Managing products
+3. Adding products into cart w/ checkout behavior
+4. Sales reports
+
+### Components
+There are 3 components for building the app:
+1. Database - Using Postgres and knex as SQL query builder.
+2. API (Backend) - Using NodeJS and Express as the web application Framework.
+3. Web (Frontend) - Using VueJS and NuxtJS as the UI Framework.
+
+### DB Migration
+Database migrations is handled and defined in the API which will run upon starting the service.
+
+### Deployment
+You may seamlessly deploy the whole app using docker-compose cli. [See below for the installation instructions.](#Installation)
+
+## See it in action
+http://moscord-env.eba-m5685j4z.ap-southeast-1.elasticbeanstalk.com/sellers/create
+
+Deployed the app using AWS Elastic Beanstalk for both web and api services which running under Docker w/ each designated (multi) containers.
 
 ## Running in your local environment
 ### Requirements
