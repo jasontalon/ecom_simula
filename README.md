@@ -50,7 +50,7 @@ If your environment is using the abovementioned ports, then adjust the port mapp
  Other exercises can be demonstrated here:
  
  - page: http://moscord-env.eba-m5685j4z.ap-southeast-1.elasticbeanstalk.com/exercises
- - code: https://github.com/jasontalon/ecom_simula/blob/f7bbc0ae4bdd0c487bae5fd9c4475391dfa6bf63/web/pages/exercises.vue#L106-L134
+ - code: https://github.com/jasontalon/ecom_simula/blob/f7bbc0ae4bdd0c487bae5fd9c4475391dfa6bf63/web/pages/exercises.vue#L106-L138
  
 
  
